@@ -22,4 +22,8 @@ public class CatagoryService {
     public ResponseEntity<Iterable<Catagory>> getAllCatagory(){
         return new ResponseEntity<Iterable<Catagory>>(catagoryRepository.findAll(),HttpStatus.OK);
     }
+
+    public ResponseEntity<Catagory> getCatagoryById(Long id){
+        return new ResponseEntity<Catagory>(catagoryRepository.findOne(id),HttpStatus.OK);
+    }
 }

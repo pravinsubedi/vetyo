@@ -24,5 +24,9 @@ public class CatagoryController {
     public ResponseEntity<Iterable<Catagory>> getAllCatagory(){
         return catagoryService.getAllCatagory();
     }
+    @RequestMapping(method = RequestMethod.GET,value = "/catagory/{id}")
+    public ResponseEntity<Catagory> getCatagoryById(@PathVariable Long id){
+        return catagoryService.getCatagoryById(id);
+    }
 
 }
