@@ -1,6 +1,7 @@
 package com.vetyo.service;
 
 import com.vetyo.dto.AdRepository;
+import com.vetyo.exception.ResourceNotFoundException;
 import com.vetyo.model.Ad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,9 @@ public class AdService {
     }
 
     public ResponseEntity<Ad> getAdById(Long id){
+        if (adRepository.findOne(id)==null){
+            throw new ResourceNotFoundException("Ad with ad id"+id+"not found");
+        }
         return new ResponseEntity<Ad>(adRepository.findOne(id),HttpStatus.OK);
     }
 
