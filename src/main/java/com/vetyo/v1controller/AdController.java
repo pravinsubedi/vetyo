@@ -3,6 +3,8 @@ package com.vetyo.v1controller;
 import com.vetyo.model.Ad;
 import com.vetyo.service.AdService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +24,8 @@ public class AdController {
     }
 
     @RequestMapping(value = "/ad",method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Ad>> getAllAd (){
-        return adService.getAllAd();
+    public ResponseEntity<Page<Ad>> getAllAd (Pageable pageable){
+        return adService.getAllAd(pageable);
     }
 
     @RequestMapping(value = "/ad/{id}",method = RequestMethod.GET)

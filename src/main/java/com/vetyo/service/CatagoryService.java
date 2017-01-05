@@ -4,6 +4,8 @@ import com.vetyo.dto.CatagoryRepository;
 import com.vetyo.exception.ResourceNotFoundException;
 import com.vetyo.model.Catagory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -20,8 +22,8 @@ public class CatagoryService {
         return new ResponseEntity<Catagory>(catagoryRepository.findOne(catagory.getCid()), HttpStatus.CREATED);
     }
 
-    public ResponseEntity<Iterable<Catagory>> getAllCatagory(){
-        return new ResponseEntity<Iterable<Catagory>>(catagoryRepository.findAll(),HttpStatus.OK);
+    public ResponseEntity<Page<Catagory>> getAllCatagory(Pageable pageable){
+        return new ResponseEntity(catagoryRepository.findAll(pageable),HttpStatus.OK);
     }
 
     public ResponseEntity<Catagory> getCatagoryById(Long id){

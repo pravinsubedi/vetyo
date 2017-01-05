@@ -1,9 +1,7 @@
 package com.vetyo.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Admin on 1/3/2017.
@@ -14,8 +12,24 @@ public class Catagory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cid;
     private String cname;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cid")
+    private List<Ad> adList;
 
     public Catagory() {
+    }
+
+    public List<Ad> getAdList() {
+        return adList;
+    }
+
+    public void setAdList(List<Ad> adList) {
+        this.adList = adList;
+    }
+
+    public Catagory(String cname, List<Ad> adList) {
+        this.cname = cname;
+        this.adList = adList;
     }
 
     public Catagory(String cname) {
