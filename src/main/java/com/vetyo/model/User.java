@@ -1,9 +1,9 @@
 package com.vetyo.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Admin on 1/3/2017.
@@ -12,47 +12,65 @@ import javax.persistence.Id;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    private String firstname;
-    private String lastname;
+    private Long uid;
+    private String username;
     private String password;
     private String email;
     private String pno;
+    @Column(name = "admin",columnDefinition = "char(3)")
+    @Type(type = "yes_no")
+    private Boolean admin;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "uid")
+    private List<Ad> adList;
 
-    public User(String firstname, String lastname, String password, String email, String pno) {
-        this.firstname = firstname;
-        this.lastname = lastname;
+    public User(String username, String password, String email, String pno, Boolean admin) {
+        this.username = username;
         this.password = password;
         this.email = email;
         this.pno = pno;
+        this.admin = admin;
     }
 
     public User() {
 
     }
 
-    public Long getId() {
-        return id;
+    public User(List<Ad> adList) {
+        this.adList = adList;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public User(String username, String password, String email, String pno, Boolean admin, List<Ad> adList) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.pno = pno;
+        this.admin = admin;
+        this.adList = adList;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public List<Ad> getAdList() {
+        return adList;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setAdList(List<Ad> adList) {
+        this.adList = adList;
     }
 
-    public String getLastname() {
-        return lastname;
+    public Long getUid() {
+        return uid;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setUid(Long uid) {
+        this.uid = uid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -78,4 +96,13 @@ public class User {
     public void setPno(String pno) {
         this.pno = pno;
     }
+
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
+    }
+
 }

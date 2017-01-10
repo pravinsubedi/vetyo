@@ -23,10 +23,20 @@ public class ProfileService {
         user1=userRepository.findOne(id);
         user1.setPassword(user.getPassword());
         user1.setEmail(user.getEmail());
-        user1.setFirstname(user.getFirstname());
-        user1.setLastname(user.getLastname());
+        user1.setUsername(user.getUsername());
+        user1.setAdmin(user.getAdmin());
+        user1.setPno(user.getPno());
         userRepository.save(user1);
         return new ResponseEntity<User>(userRepository.findOne(id),HttpStatus.OK);
     }
-
+    public ResponseEntity<User> postAd(Long id,User user){
+        User user1=new User();
+        user1=userRepository.findOne(id);
+        user1.setAdList(user.getAdList());
+        userRepository.save(user1);
+        return new ResponseEntity<User>(userRepository.findOne(id),HttpStatus.OK);
+    }
+    public ResponseEntity<User> getAd(Long id){
+        return new ResponseEntity<User>(userRepository.findOne(id),HttpStatus.OK);
+    }
 }

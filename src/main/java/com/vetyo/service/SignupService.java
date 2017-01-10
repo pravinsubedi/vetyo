@@ -19,6 +19,6 @@ public class SignupService {
         final String encodedPassword=passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         userRepository.save(user);
-        return new ResponseEntity<User>(userRepository.findOne(user.getId()),HttpStatus.CREATED);
+        return new ResponseEntity<User>(userRepository.findOne(user.getUid()),HttpStatus.CREATED);
     }
 }

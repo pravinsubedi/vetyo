@@ -2,6 +2,8 @@ package com.vetyo.v1controller;
 
 import com.vetyo.model.Ad;
 import com.vetyo.service.AdService;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
