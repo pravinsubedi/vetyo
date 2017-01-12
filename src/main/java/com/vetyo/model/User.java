@@ -1,8 +1,11 @@
 package com.vetyo.model;
 
 import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -13,9 +16,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long uid;
+    @NotNull
+    @NotEmpty
     private String username;
+    @NotNull
+    @NotEmpty
     private String password;
+    @NotNull
+    @NotEmpty
+    @Email(message = "Validate email and try again")
     private String email;
+    @NotNull
+    @NotEmpty
     private String pno;
     @Column(name = "admin",columnDefinition = "char(3)")
     @Type(type = "yes_no")
